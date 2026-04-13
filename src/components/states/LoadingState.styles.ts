@@ -7,10 +7,6 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     paddingVertical: 40,
   },
-  spinner: {
-    size: "large" as const,
-    color: "#3B82F6",
-  },
   message: {
     marginTop: 16,
     fontSize: 16,

@@ -12,7 +12,7 @@ export const RootStack = (): React.JSX.Element => {
     <Stack.Navigator
       screenOptions={{
         headerShown: true,
-        headerBackTitleVisible: false,
+        headerBackTitle: "",
         headerStyle: {
           backgroundColor: "#FFFFFF",
         },

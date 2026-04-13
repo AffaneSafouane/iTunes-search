@@ -1,12 +1,15 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { RootStack } from "./src/navigation";
 
 export default function App(): React.JSX.Element {
   return (
-    <NavigationContainer>
-      <RootStack />
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <RootStack />
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
