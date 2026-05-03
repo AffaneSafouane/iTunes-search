@@ -38,7 +38,7 @@ Assurez-vous d'avoir installé **Node.js** sur votre machine, ainsi que l'applic
 ### 1. Cloner le dépôt (ou extraire l'archive du projet)
 
 ```bash
-git clone [iTunes Search](https://github.com/AffaneSafouane/iTunes-search.git)
+git clone https://github.com/AffaneSafouane/iTunes-search.git
 cd iTunes
 ```
 
