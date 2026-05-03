@@ -49,14 +49,21 @@ export const fetchITunesTracks = async (
     };
   }
 
-  const query = new URLSearchParams({
+  const queryParams: Record<string, string> = {
     term: normalizedTerm,
+    media: 'music',
     entity: params.entity ?? DEFAULT_ENTITY,
-    attribute: params.attribute,
     limit: String(params.limit ?? DEFAULT_LIMIT),
-  });
+  };
 
+  if (params.attribute) {
+    queryParams.attribute = params.attribute;
+  }
+  
+  const query = new URLSearchParams(queryParams);
   const url = `${ITUNES_BASE_URL}?${query.toString()}`;
+
+  console.log("URL APPELÉE :", url);
 
   try {
     const response = await fetch(url);
@@ -67,11 +74,16 @@ export const fetchITunesTracks = async (
 
     const payload: unknown = await response.json();
 
-    if (!isITunesSearchResponse(payload)) {
+    if (!isObject(payload) || !Array.isArray(payload.results)) {
       throw new Error("Invalid iTunes API response format");
     }
 
-    return payload;
+    const validResults = payload.results.filter(isITunesTrackDTO);
+
+    return {
+      resultCount: validResults.length,
+      results: validResults,
+    };
   } catch (error: unknown) {
     if (error instanceof Error) {
       throw new Error(`Unable to fetch tracks from iTunes: ${error.message}`);

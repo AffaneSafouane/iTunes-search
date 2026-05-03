@@ -1,5 +1,5 @@
 import React from "react";
-import { Pressable, Text, TextInput, View } from "react-native";
+import { Pressable, Text, TextInput, View, Keyboard } from "react-native";
 
 import type { SearchAttribute } from "../../types";
 
@@ -11,6 +11,7 @@ interface SearchBarProps {
   searchAttribute: SearchAttribute;
   onChangeSearchAttribute: (attribute: SearchAttribute) => void;
   placeholder?: string;
+  onSubmitEditing?: () => void;
 }
 
 const SEARCH_MODES: ReadonlyArray<{
@@ -38,6 +39,7 @@ export const SearchBar = ({
         autoCapitalize="none"
         autoCorrect={false}
         returnKeyType="search"
+        onSubmitEditing={() => Keyboard.dismiss()}
         style={styles.input}
       />
 

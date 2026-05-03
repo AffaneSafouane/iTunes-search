@@ -12,7 +12,7 @@ export const AppTabs = (): React.JSX.Element => {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: "#3B82F6",
+        tabBarActiveTintColor: "#f63b3b",
         tabBarInactiveTintColor: "#98A2B3",
         tabBarStyle: {
           borderTopWidth: 1,

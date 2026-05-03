@@ -1,5 +1,6 @@
-import React, { useCallback, useState } from "react";
-import { FlatList, SafeAreaView, View } from "react-native";
+import React, { useCallback, useEffect, useState } from "react";
+import { FlatList, View } from "react-native";
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
@@ -26,20 +27,16 @@ export const SearchScreen = (): React.JSX.Element => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSearch = useCallback(async () => {
-    if (!searchValue.trim()) {
-      setResults([]);
-      setError(null);
-      return;
-    }
-
+  const handleSearch = useCallback(async (term: string, attribute: SearchAttribute) => {
     setIsLoading(true);
     setError(null);
 
+    const finalTerm = term.trim() ? term : "top hits"; // Terme par défaut pour éviter les recherches vides
+
     try {
       const response = await fetchITunesTracks({
-        term: searchValue,
-        attribute: searchAttribute,
+        term: finalTerm,
+        attribute: attribute,
         limit: 25,
       });
 
@@ -53,7 +50,15 @@ export const SearchScreen = (): React.JSX.Element => {
     } finally {
       setIsLoading(false);
     }
-  }, [searchValue, searchAttribute]);
+  }, []);
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      handleSearch(searchValue, searchAttribute);
+    }, 500);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchValue, searchAttribute, handleSearch]);
 
   const handleTrackPress = (track: Track): void => {
     navigation.navigate("TrackDetail", { track });
@@ -61,7 +66,7 @@ export const SearchScreen = (): React.JSX.Element => {
 
   const renderEmptyOrError = (): React.JSX.Element | null => {
     if (error) {
-      return <ErrorState message="Erreur de recherche" details={error} onRetry={handleSearch} />;
+      return <ErrorState message="Erreur de recherche" details={error} onRetry={() => handleSearch(searchValue, searchAttribute)} />;
     }
 
     if (searchValue.trim() && !isLoading && results.length === 0) {
