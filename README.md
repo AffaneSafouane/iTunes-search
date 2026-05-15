@@ -1,4 +1,4 @@
-# iTunes Explorer - React Native 🎵
+# iTunes Explorer - React Native
 
 ## Description du projet
 Cette application React Native permet d'explorer l'immense base de données d'iTunes via leur API publique. Les utilisateurs peuvent rechercher des musiques par artiste ou par nom de piste, consulter les détails d'un morceau, l'ajouter à une collection personnelle (base de données locale) et lui attribuer une note personnalisée.
