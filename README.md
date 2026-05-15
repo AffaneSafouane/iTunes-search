@@ -30,7 +30,7 @@ Cette application React Native permet d'explorer l'immense base de données d'iT
 ```bash
 # Cloner le dépôt
 git clone https://github.com/AffaneSafouane/iTunes-search.git
-cd itunes-search
+cd iTunes-search
  
 # Installer les dépendances
 npm install
