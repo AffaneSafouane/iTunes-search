@@ -1,9 +1,9 @@
-# iTunes Search - React Native 
+# iTunes Explorer - React Native 🎵
 
 ## Description du projet
 Cette application React Native permet d'explorer l'immense base de données d'iTunes via leur API publique. Les utilisateurs peuvent rechercher des musiques par artiste ou par nom de piste, consulter les détails d'un morceau, l'ajouter à une collection personnelle (base de données locale) et lui attribuer une note personnalisée.
 
-## 🏗 Règles d'architecture (Context for AI & Contributors)
+## Règles d'architecture 
 * **Composants modulaires :** Ce projet privilégie strictement l'utilisation de plusieurs petits composants simples et réutilisables (ex: `SearchBar`, `TrackItem`, `RatingStars`) plutôt que de gros composants monolithiques.
 * **Lisibilité :** Le code doit être clair, strictement typé et commenté aux endroits clés pour expliquer la logique (pas de commentaires redondants).
         
@@ -25,5 +25,18 @@ Cette application React Native permet d'explorer l'immense base de données d'iT
 4.  **Collection personnelle :** Possibilité d'ajouter un résultat à sa propre base de données locale.
 5.  **Notation :** Système de rating personnalisé pour évaluer les morceaux sauvegardés.
         
-## 🚀 Installation et Lancement
-*(À compléter à la fin du développement avec les commandes `npm install` et `npx expo start` ou équivalent)*
+## Installation et Lancement
+ 
+```bash
+# Cloner le dépôt
+git clone https://github.com/AffaneSafouane/iTunes-search.git
+cd itunes-search
+ 
+# Installer les dépendances
+npm install
+ 
+# Lancer l'application (Expo)
+npx expo start ---tunnel
+```
+ 
+> **Prérequis :** Node.js ≥ 18, npm ≥ 9, et l'application [Expo Go](https://expo.dev/go) sur votre appareil mobile (ou un émulateur iOS/Android configuré localement).
