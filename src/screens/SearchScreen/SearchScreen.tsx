@@ -31,7 +31,7 @@ export const SearchScreen = (): React.JSX.Element => {
     setIsLoading(true);
     setError(null);
 
-    const finalTerm = term.trim() ? term : "top hits"; // Terme par défaut pour éviter les recherches vides
+    const finalTerm = term.trim(); 
 
     try {
       const response = await fetchITunesTracks({

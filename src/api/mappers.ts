@@ -1,4 +1,5 @@
 import type { ITunesTrackDTO, Track } from "../types";
+import { getHighResArtworkUrl } from "./artwork";
 
 export const mapITunesTrackToTrack = (dto: ITunesTrackDTO): Track => {
   return {
@@ -7,6 +8,7 @@ export const mapITunesTrackToTrack = (dto: ITunesTrackDTO): Track => {
     artistName: dto.artistName,
     collectionName: dto.collectionName,
     artworkUrl100: dto.artworkUrl100,
+    artworkUrl1000: getHighResArtworkUrl(dto.artworkUrl100),
     previewUrl: dto.previewUrl,
     trackTimeMillis: dto.trackTimeMillis,
     primaryGenreName: dto.primaryGenreName,

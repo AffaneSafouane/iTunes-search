@@ -13,7 +13,7 @@ export const TrackHeaderCard = ({ track }: TrackHeaderCardProps): React.JSX.Elem
   return (
     <View style={styles.container}>
       <Image
-        source={{ uri: track.artworkUrl100 }}
+        source={{ uri: track.artworkUrl1000 }}
         style={styles.artwork}
         resizeMode="cover"
       />

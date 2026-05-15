@@ -4,6 +4,7 @@ export interface Track {
   artistName: string;
   collectionName?: string;
   artworkUrl100: string;
+  artworkUrl1000: string;
   previewUrl?: string;
   trackTimeMillis?: number;
   primaryGenreName?: string;

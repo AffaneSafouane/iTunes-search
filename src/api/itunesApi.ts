@@ -51,7 +51,7 @@ export const fetchITunesTracks = async (
 
   const queryParams: Record<string, string> = {
     term: normalizedTerm,
-    media: 'music',
+    media: "music",
     entity: params.entity ?? DEFAULT_ENTITY,
     limit: String(params.limit ?? DEFAULT_LIMIT),
   };
@@ -59,11 +59,9 @@ export const fetchITunesTracks = async (
   if (params.attribute) {
     queryParams.attribute = params.attribute;
   }
-  
+
   const query = new URLSearchParams(queryParams);
   const url = `${ITUNES_BASE_URL}?${query.toString()}`;
-
-  console.log("URL APPELÉE :", url);
 
   try {
     const response = await fetch(url);
@@ -74,15 +72,29 @@ export const fetchITunesTracks = async (
 
     const payload: unknown = await response.json();
 
+    // console.log("iTunes API response:", JSON.stringify(payload, null, 2));
+
     if (!isObject(payload) || !Array.isArray(payload.results)) {
       throw new Error("Invalid iTunes API response format");
     }
 
     const validResults = payload.results.filter(isITunesTrackDTO);
 
+    // L'API iTunes ignore parfois `attribute` côté serveur 
+    // On filtre côté client pour garantir le comportement attendu : "Artiste" ne retient que les
+    // résultats dont le nom d'artiste matche, "Titre" ceux dont le titre matche.
+    const needle = normalizedTerm.toLocaleLowerCase();
+    const filteredResults = validResults.filter((track) => {
+      if (params.attribute === "artistTerm") {
+        return track.artistName.toLocaleLowerCase().includes(needle);
+      }
+
+      return track.trackName.toLocaleLowerCase().includes(needle);
+    });
+
     return {
-      resultCount: validResults.length,
-      results: validResults,
+      resultCount: filteredResults.length,
+      results: filteredResults,
     };
   } catch (error: unknown) {
     if (error instanceof Error) {
